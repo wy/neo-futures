@@ -1,5 +1,5 @@
 # neo-futures
-Multi-Oracle Implementation for Neo Blockchain
+Multi-Oracle Implementation for Neo Blockchain (Submitted for CoZ dApps #2 Challenge). Find out more about [City of Zion](https://cityofzion.io/).
 
 ![NEO Futures logo](neo-futures.JPG)
 
@@ -30,3 +30,33 @@ It works by having multiple oracles that stake a non-trivial amount of NEO-GAS (
 N.B. This differs from Augur and Gnosis in that this is not about using multiple oracles to guess the price (wisdom of the crowds). Instead, this is about trying to improve the reliability of 'incontrovertible' facts getting transferred to the Blockchain.
 
 Naturally, the strength of this solution is dependent on the number of Oracles, as this increases to a large number, it becomes harder and harder for any malicious users to fool the system (without risking a significant amount of assets - in this case, NEO-GAS).
+
+## The Algorithm (main idea)
+
+```
+1. Create a new game type (e.g. retrieve the price of NEO in USD at a certain time from the Coin Market Cap API Ticker)
+2. Create a new instance of the game (NEO-USD price at time X)
+3. Oracles register themselves for the game instance by staking Y NEO-GAS Asset
+4. Event occurs at time X
+5. Oracles register and record the information
+6. Oracles send to the Smart Contract (The Judge) their "value" e.g. $115
+7. Deadline D occurs (D > X)
+8. Judge can be triggered by anyone to then make a judgement by choosing the most popular choice and separating the Oracles into Truth Tellers and Liars. Liars lose their balance, and Truth Tellers are rewarded from the Liars' seized assets.
+9. Judge contract has now saved and uneditable final value which other smart contracts can retrieve
+```
+## Working Version
+
+To demonstrate how it works, we have provided and deployed the following components (running on CoZ Testnet):
+1. Judge Smart Contract (Hash: XXXX). Source code is in this repo
+2. Python Oracle Implementation for Coin Market Cap NEO-USD Pair
+3. Created a game type (NEO-USD)
+4. Python Instance Creator Implementation (create a new game instance to get a new price every 10 minutes - 6 per hour)
+5. Web Explorer Interface - allowing you to see the NEO Blockchain actually having access to the price of NEO (in USD) and comparing it to an API ticker pull (python)
+
+## Future Work
+
+At the moment, there is no known easy way to trigger transfers of NEO or NEO-GAS out of a smart contract. This can be done with NEP-5 or other tokens, but not NEO or NEO-GAS due to them being a different citizen class on the blockchain. Obviously, in a real life scenario we would need this functionality, however it is not that important to demonstrate the value of the approach.
+
+Secondly, the purpose of the NEO-Futures project is to eventually implement a Futures Exchange for NEO and maybe other currencies. We hope to use any prize awards from CoZ to help devote some time and get support to build it. A fast, decentralized futures exchange pegged to Fiat or other currencies?! Sounds good, right.
+
+With thanks to Kiran Purang (Design), Sharon Chan (Fuel).
