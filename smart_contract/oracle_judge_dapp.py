@@ -38,7 +38,7 @@ key_prefix_agent_locked_balance = "agent_locked_balance::"
 
 
 
-version = "0.0.1"
+version = "0.0.3"
 
 # Algorithm Description
 """
@@ -61,6 +61,9 @@ version = "0.0.1"
    This balance must be > 5 NEO-GAS in order to register
    You can register by sending in 5 NEO-GAS along with your register request
    Everyone has an Available Balance and a Locked Balance
+   N.B. We did not implement in this phase of development using --attach-gas=5
+   Instead, we just mocked it by allowing an extra parameter for 'gas' in submit_prediction
+   This will be replaced by NEP-5 or attach-gas in future versions
    
    [[Judging]]
    The design of this smart contract is that every submission updates the state of the smart contract
@@ -79,7 +82,7 @@ version = "0.0.1"
    create_new_game_instance {{client}} {{game_type}} {{instance_ts}}
    > creates a new instance of game if instance isn't live but game type is
    
-   submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} (--attach-gas=5)
+   submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
    > submits prediction for game instance as long as balance is high enough (including any gas sent with this transaction)
       
    get_prediction_for_instance {{game_type}} {{instance_ts}}
@@ -152,7 +155,7 @@ def Main(operation, args):
                 return False
             return CreateNewGameInstance(client_hash, game_type, instance_ts)
 
-        # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} (--attach-gas=5)
+        # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
         if operation == 'submit_prediction':
             if arg_len != 4:
                 Log("Wrong arg length")
@@ -161,6 +164,7 @@ def Main(operation, args):
             game_type = args[1]
             instance_ts = args[2]
             prediction = args[3]
+            gas_submission = args[4]
             if not CheckWitness(oracle):
                 Log("Unauthorised hash")
                 return False
@@ -527,8 +531,8 @@ def JudgeInstance(game_type, instance_ts):
     return True
 
 
-# submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} (--attach-gas=5)
-def SubmitPrediction(oracle, game_type, instance_ts, prediction):
+# submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
+def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission):
     if not isGameInstanceLive(game_type, instance_ts):
         return "Game Instance not yet commissioned"
     if isGameInstanceJudged(game_type, instance_ts):
@@ -542,40 +546,23 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction):
         current_oracle_balance = GetOracleBalance(oracle)
         n_oracles_for_instance = GetOracleCountForInstance(game_type, instance_ts)
 
-        # See if the agent has sent any NEO-GAS assets
-        tx = GetScriptContainer()
-        refs = tx.References
-
-        if len(refs) < 1:
+        if gas_submission == '0':
             if current_oracle_balance >= collateral_requirement:
                 new_count = n_oracles_for_instance + 1
                 RegisterOracle(game_type, instance_ts, oracle, new_count)
             else:
                 # No assets sent and existing balance too low
                 return "Not enough balance to register"
+        elif gas_submission == b'\x00e\xcd\x1d':
+                current_oracle_balance = current_oracle_balance + gas_submission
+                key = concat(key_prefix_agent_available_balance, oracle)
+                # Updates Balance of Oracle
+                context = GetContext()
+                Put(context, key, current_oracle_balance)
+                new_count = n_oracles_for_instance + 1
+                RegisterOracle(game_type, instance_ts, oracle, new_count)
         else:
-            ref = refs[0]
-            sentAsset = GetAssetId(ref)
-            #sender_hash = GetScriptHash(ref)
-            if sentAsset == GAS_ASSET_ID:
-                receiver = GetExecutingScriptHash()
-                totalGasSent = 0
-                cOutputs = len(tx.Outputs)
-                for output in tx.Outputs:
-                    Log(output.Value)
-                    shash = GetScriptHash(output)
-                    if shash == receiver:
-                        totalGasSent = totalGasSent + output.Value
-                if totalGasSent == b'\x00e\xcd\x1d':
-                    current_oracle_balance = current_oracle_balance + totalGasSent
-                    key = concat(key_prefix_agent_available_balance, oracle)
-                    # Updates Balance of Oracle
-                    context = GetContext()
-                    Put(context, key, current_oracle_balance)
-                    new_count = n_oracles_for_instance + 1
-                    RegisterOracle(game_type, instance_ts, oracle, new_count)
-                else:
-                    return "Wrong amount of NEO GAS Sent"
+            return "Wrong amount of NEO GAS Sent"
 
         # Now to submit prediction if no errors
         RegisterPrediction(game_type, instance_ts, oracle, prediction)
@@ -588,16 +575,4 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction):
         if CheckTimestamp(instance_ts):
             return JudgeInstance(game_type, instance_ts)
         return True
-
-
-
-
-
-
-
-
-
-
-
-
 
