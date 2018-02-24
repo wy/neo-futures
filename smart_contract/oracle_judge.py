@@ -93,7 +93,7 @@ version = "0.0.1"
    debug_get_value {{key}}
    > debug the smart contract for ease, key lookup in getcontext
    
-   # judge_instance {{game_type}} {{instance_ts}}
+   judge_instance {{game_type}} {{instance_ts}}
    > judge the instance if time is passed the deadline and not yet judged
 
 """
@@ -349,7 +349,8 @@ def isGameInstanceJudged(game_type, instance_ts):
     k2 = concat(key_prefix_game_instance, instance_ts)
     k12 = concat(k1, k2)
     key = concat(k12, key_prefix_game_instance_judged)
-    v = Get(GetContext(), key)
+    context = GetContext()
+    v = Get(context, key)
     if v == 0:
         return False
     else:
@@ -360,7 +361,8 @@ def SetGameInstanceJudged(game_type, instance_ts):
     k2 = concat(key_prefix_game_instance, instance_ts)
     k12 = concat(k1, k2)
     key = concat(k12, key_prefix_game_instance_judged)
-    Put(GetContext(), key, 1)
+    context = GetContext()
+    Put(context, key, 1)
 
 def RegisterOracle(game_type, instance_ts, oracle, slot_n):
     k1 = concat(key_prefix_game_type, game_type)
@@ -369,14 +371,17 @@ def RegisterOracle(game_type, instance_ts, oracle, slot_n):
     k12 = concat(k1, k2)
     key = concat(k12, k3)
     # This registers the Oracle in the nth slot
-    Put(GetContext(), key, oracle)
+    context = GetContext()
+    Put(context, key, oracle)
     k4 = concat(key_prefix_game_instance_oracle, oracle)
     key = concat(k12, k4)
     # This registers the Oracle in the Game Instance
-    Put(GetContext(), key, 1)
+    context = GetContext()
+    Put(context, key, 1)
     # This updates the counter
     key = concat(k12, key_prefix_game_instance_count)
-    Put(GetContext(), key, slot_n)
+    context = GetContext()
+    Put(context, key, slot_n)
     return True
 
 def GetOracleAtIndexN(game_type, instance_ts, index):
@@ -386,7 +391,8 @@ def GetOracleAtIndexN(game_type, instance_ts, index):
     k12 = concat(k1, k2)
     key = concat(k12, k3)
     # This registers the Oracle in the nth slot
-    v = Get(GetContext(), key)
+    context = GetContext()
+    v = Get(context, key)
     return v
 
 def RegisterPrediction(game_type, instance_ts, oracle, prediction):
@@ -396,7 +402,8 @@ def RegisterPrediction(game_type, instance_ts, oracle, prediction):
     k3 = concat(key_prefix_game_instance_oracle, oracle)
     k123 = concat(k12, k3)
     key = concat(k123, key_prefix_game_instance_prediction)
-    Put(GetContext(), key, prediction)
+    context = GetContext()
+    Put(context, key, prediction)
 
 
 def GetOraclePrediction(game_type, instance_ts, oracle):
@@ -406,7 +413,8 @@ def GetOraclePrediction(game_type, instance_ts, oracle):
     k3 = concat(key_prefix_game_instance_oracle, oracle)
     k123 = concat(k12, k3)
     key = concat(k123, key_prefix_game_instance_prediction)
-    v = Get(GetContext(), key)
+    context = GetContext()
+    v = Get(context, key)
     return v
 
 # Transfers collateral from locked to available
@@ -420,11 +428,13 @@ def UnlockCollateral(oracle):
 
 def UpdateAvailableBalance(oracle, balance):
     key = concat(key_prefix_agent_available_balance, oracle)
-    Put(GetContext(), key, balance)
+    context = GetContext()
+    Put(context, key, balance)
 
 def UpdateLockedBalance(oracle, balance):
     key = concat(key_prefix_agent_locked_balance, oracle)
-    Put(GetContext(), key, balance)
+    context = GetContext()
+    Put(context, key, balance)
 
 def LockCollateral(oracle):
     available = GetOracleBalance(oracle)
@@ -538,14 +548,14 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction):
         if len(refs) < 1:
             if current_oracle_balance >= collateral_requirement:
                 new_count = n_oracles_for_instance + 1
-                RegisterOracle(game_type, instance_ts, new_count)
+                RegisterOracle(game_type, instance_ts, oracle, new_count)
             else:
                 # No assets sent and existing balance too low
                 return "Not enough balance to register"
         else:
             ref = refs[0]
             sentAsset = GetAssetId(ref)
-            sender_hash = GetScriptHash(ref)
+            #sender_hash = GetScriptHash(ref)
             if sentAsset == GAS_ASSET_ID:
                 receiver = GetExecutingScriptHash()
                 totalGasSent = 0
@@ -559,9 +569,10 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction):
                     current_oracle_balance = current_oracle_balance + totalGasSent
                     key = concat(key_prefix_agent_available_balance, oracle)
                     # Updates Balance of Oracle
-                    Put(GetContext(), key, current_oracle_balance)
+                    context = GetContext()
+                    Put(context, key, current_oracle_balance)
                     new_count = n_oracles_for_instance + 1
-                    RegisterOracle(game_type, instance_ts, new_count)
+                    RegisterOracle(game_type, instance_ts, oracle, new_count)
                 else:
                     return "Wrong amount of NEO GAS Sent"
 
