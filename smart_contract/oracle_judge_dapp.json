@@ -1,0 +1,43 @@
+{
+	"contract": {
+		"params": "0710",
+		"inputs": [
+			{
+				"name": "create_new_game",
+				"params": ["create_new_game", ["ASvsbeHUiYfLj8NFEwgW88QPegnitBU2Mv","NEO_USD"]]
+			},
+			{
+				"name": "create_new_game_instance",
+				"params": ["create_new_game_instance", ["ASvsbeHUiYfLj8NFEwgW88QPegnitBU2Mv","NEO_USD",1519499100]]
+			},
+			{
+				"name": "submit_prediction",
+				"params": ["submit_prediction", ["ASvsbeHUiYfLj8NFEwgW88QPegnitBU2Mv","NEO_USD",1519499100,"3560",5]]
+			},
+			{
+				"name": "remove_prediction_game",
+				"params": ["remove_prediction", ["NEO_USD"]]
+			},
+			{
+				"name": "register",
+				"params": ["register", ["NEO_USD","AS2WGHHsCvfxaET6CvuPVcBSEqYNYiHGr9"]]
+			},
+			{
+				"name": "registerB",
+				"params": ["register", ["NEO_USD","AXesPjJVBTk5vVAKrX3yQfowQwpJ3gQABJ"]]
+			},
+			{
+				"name": "get_latest",
+				"params": ["get_latest_prediction", ["NEO_USD"]]
+			},
+			{
+				"name": "submit",
+				"params": ["submit_prediction", ["NEO_USD","12","3","AS2WGHHsCvfxaET6CvuPVcBSEqYNYiHGr9"]]
+			},
+			{
+				"name": "submitB",
+				"params": ["submit_prediction", ["NEO_USD","12","3","AXesPjJVBTk5vVAKrX3yQfowQwpJ3gQABJ"]]
+			},
+		]
+	}
+}

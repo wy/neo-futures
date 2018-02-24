@@ -38,7 +38,7 @@ key_prefix_agent_locked_balance = "agent_locked_balance::"
 
 
 
-version = "0.0.3"
+version = "0.0.4"
 
 # Algorithm Description
 """
@@ -137,9 +137,9 @@ def Main(operation, args):
                 return False
             client_hash = args[0]
             game_type = args[1]
-            if not CheckWitness(client_hash):
-                Log("Unauthorised hash")
-                return False
+            #if not CheckWitness(client_hash):
+            #    Log("Unauthorised hash")
+            #    return False
             return CreateNewGame(client_hash, game_type)
 
         # create_new_game_instance {{client}} {{game_type}} {{instance_ts}}
@@ -150,14 +150,14 @@ def Main(operation, args):
             client_hash = args[0]
             game_type = args[1]
             instance_ts = args[2]
-            if not CheckWitness(client_hash):
-                Log("Unauthorised hash")
-                return False
+            #if not CheckWitness(client_hash):
+            #    Log("Unauthorised hash")
+            #    return False
             return CreateNewGameInstance(client_hash, game_type, instance_ts)
 
         # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
         if operation == 'submit_prediction':
-            if arg_len != 4:
+            if arg_len != 5:
                 Log("Wrong arg length")
                 return False
             oracle = args[0]
@@ -165,10 +165,15 @@ def Main(operation, args):
             instance_ts = args[2]
             prediction = args[3]
             gas_submission = args[4]
-            if not CheckWitness(oracle):
-                Log("Unauthorised hash")
-                return False
-            return SubmitPrediction(oracle, game_type, instance_ts, prediction)
+            Log(oracle)
+            Log(game_type)
+            Log(instance_ts)
+            Log(prediction)
+            Log(gas_submission)
+            #if not CheckWitness(oracle):
+            #    Log("Unauthorised hash")
+            #    return False
+            return SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
 
         # judge_instance {{game_type}} {{instance_ts}}
         if operation == 'judge_instance':
@@ -533,46 +538,64 @@ def JudgeInstance(game_type, instance_ts):
 
 # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
 def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission):
+    Log(oracle)
+    Log(game_type)
+    Log(instance_ts)
+    Log(prediction)
+    Log(gas_submission)
     if not isGameInstanceLive(game_type, instance_ts):
         return "Game Instance not yet commissioned"
     if isGameInstanceJudged(game_type, instance_ts):
         return "Game Instance already judged"
     if CheckTimestamp(instance_ts):
         return JudgeInstance(game_type, instance_ts) # Too late to submit, but can judge
-    else:
-        # Check if Oracle already registered
-        if isOracleRegisteredForInstance(oracle, game_type, instance_ts):
-            return "Already registered"
-        current_oracle_balance = GetOracleBalance(oracle)
-        n_oracles_for_instance = GetOracleCountForInstance(game_type, instance_ts)
 
-        if gas_submission == '0':
-            if current_oracle_balance >= collateral_requirement:
-                new_count = n_oracles_for_instance + 1
-                RegisterOracle(game_type, instance_ts, oracle, new_count)
-            else:
-                # No assets sent and existing balance too low
-                return "Not enough balance to register"
-        elif gas_submission == b'\x00e\xcd\x1d':
-                current_oracle_balance = current_oracle_balance + gas_submission
-                key = concat(key_prefix_agent_available_balance, oracle)
-                # Updates Balance of Oracle
-                context = GetContext()
-                Put(context, key, current_oracle_balance)
-                new_count = n_oracles_for_instance + 1
-                RegisterOracle(game_type, instance_ts, oracle, new_count)
+    Log(oracle)
+    Log(game_type)
+    Log(instance_ts)
+    Log(prediction)
+    Log(gas_submission)
+
+    # Check if Oracle already registered
+    if isOracleRegisteredForInstance(oracle, game_type, instance_ts):
+        return "Already registered"
+    current_oracle_balance = GetOracleBalance(oracle)
+    n_oracles_for_instance = GetOracleCountForInstance(game_type, instance_ts)
+
+    Log("hello")
+    Log(oracle)
+    Log(game_type)
+    Log(instance_ts)
+    Log(prediction)
+    Log(gas_submission)
+
+    if gas_submission == '0':
+        if current_oracle_balance >= collateral_requirement:
+            new_count = n_oracles_for_instance + 1
+            RegisterOracle(game_type, instance_ts, oracle, new_count)
         else:
-            return "Wrong amount of NEO GAS Sent"
+            # No assets sent and existing balance too low
+            return "Not enough balance to register"
+    elif gas_submission == 5:
+            current_oracle_balance = current_oracle_balance + gas_submission
+            key = concat(key_prefix_agent_available_balance, oracle)
+            # Updates Balance of Oracle
+            context = GetContext()
+            Put(context, key, current_oracle_balance)
+            new_count = n_oracles_for_instance + 1
+            RegisterOracle(game_type, instance_ts, oracle, new_count)
+    else:
+        return "Wrong amount of NEO GAS Sent"
 
-        # Now to submit prediction if no errors
-        RegisterPrediction(game_type, instance_ts, oracle, prediction)
-        p_count = IncrementCountForPrediction(game_type, instance_ts, prediction)
-        max_so_far = GetCurrentMax(game_type, instance_ts)
-        if p_count > max_so_far:
-            # New Current Winner
-            UpdateMaxVotes(game_type, instance_ts, p_count)
-            UpdatePrediction(game_type, instance_ts, prediction)
-        if CheckTimestamp(instance_ts):
-            return JudgeInstance(game_type, instance_ts)
-        return True
+    # Now to submit prediction if no errors
+    RegisterPrediction(game_type, instance_ts, oracle, prediction)
+    p_count = IncrementCountForPrediction(game_type, instance_ts, prediction)
+    max_so_far = GetCurrentMax(game_type, instance_ts)
+    if p_count > max_so_far:
+        # New Current Winner
+        UpdateMaxVotes(game_type, instance_ts, p_count)
+        UpdatePrediction(game_type, instance_ts, prediction)
+    if CheckTimestamp(instance_ts):
+        return JudgeInstance(game_type, instance_ts)
+    return True
 
