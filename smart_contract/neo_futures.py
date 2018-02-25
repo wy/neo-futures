@@ -102,7 +102,7 @@ they sent in for this application but not any balances they've accumulated
    submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
    > submits prediction for game instance as long as balance is high enough (including any gas sent with this transaction)
       
-   get_prediction_for_instance {{game_type}} {{instance_ts}}
+   get_prediction {{game_type}} {{instance_ts}}
    > gets finalised prediction for specific instance by judging or retrieving if already judged
    
    get_available_balance_oracle {{oracle}}
@@ -192,8 +192,8 @@ def Main(operation, args):
                 return False
             return JudgeInstance(game_type, instance_ts)
 
-        # get_prediction_for_instance {{game_type}} {{instance_ts}}
-        if operation == 'get_prediction_for_instance':
+        # get_prediction {{game_type}} {{instance_ts}}
+        if operation == 'get_prediction':
             if arg_len != 2:
                 Log("Wrong arg length")
                 return False
@@ -484,7 +484,9 @@ def WipeOutBalances(oracle):
     UpdateLockedBalance(oracle, 0)
 
 def AddBountyForOwner(owner_bounty):
-    UpdateAvailableBalance(owner, owner_bounty)
+    current_balance = GetOracleBalance(owner)
+    new_balance = current_balance + owner_bounty
+    UpdateAvailableBalance(owner, new_balance)
 
 def CreateNewGame(client_hash, game_type):
     if isGameTypeLive(game_type):
