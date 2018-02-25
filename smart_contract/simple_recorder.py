@@ -19,7 +19,7 @@ from neo.Settings import settings
 # settings.set_logfile("/tmp/logfile.log", max_bytes=1e7, backup_count=3)
 
 # Setup the smart contract instance
-smart_contract = SmartContract("6f244aaab68f51187ef236016fa60e119101dc5c")
+smart_contract = SmartContract("f9967ad48f75f1596fde1f50635ff70c12144bba")
 
 
 # Register an event handler for Runtime.Notify events of the smart contract.
