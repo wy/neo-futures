@@ -50,6 +50,7 @@ def custom_background_code():
 
 def main():
     # Setup the blockchain
+    settings.setup_coznet()
     blockchain = LevelDBBlockchain(settings.LEVELDB_PATH)
     Blockchain.RegisterBlockchain(blockchain)
     dbloop = task.LoopingCall(Blockchain.Default().PersistBlocks)
