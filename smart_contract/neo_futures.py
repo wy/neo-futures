@@ -401,15 +401,18 @@ def RegisterOracle(game_type, instance_ts, oracle, slot_n):
     key = concat(k12, k3)
     # This registers the Oracle in the nth slot
     context = GetContext()
+    Log("Register Oracle at N")
     Put(context, key, oracle)
     k4 = concat(key_prefix_game_instance_oracle, oracle)
     key = concat(k12, k4)
     # This registers the Oracle in the Game Instance
     context = GetContext()
+    Log("Register Oracle for Instance")
     Put(context, key, 1)
     # This updates the counter
     key = concat(k12, key_prefix_game_instance_count)
     context = GetContext()
+    Log("Update Counter")
     Put(context, key, slot_n)
     return True
 
@@ -584,11 +587,14 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
                 current_oracle_balance = current_oracle_balance + gas_submission
                 Log(current_oracle_balance)
                 key = concat(key_prefix_agent_available_balance, oracle)
+                Log("updating balance")
                 # Updates Balance of Oracle
                 context = GetContext()
                 Put(context, key, current_oracle_balance)
                 new_count = n_oracles_for_instance + 1
+                Log(new_count)
                 RegisterOracle(game_type, instance_ts, oracle, new_count)
+                Log("registered oracle")
         else:
             return "Wrong amount of NEO GAS Sent"
 
