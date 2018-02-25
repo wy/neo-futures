@@ -547,7 +547,7 @@ def JudgeInstance(game_type, instance_ts):
 
     notification = concat(instance_ts, n_correct)
     notification = concat(notification, correct_prediction)
-    Notify(notification)
+    Notify(instance_ts, n_correct, correct_prediction)
     # Set Game to be Judged (no more judging allowed)
     SetGameInstanceJudged(game_type, instance_ts)
     return True
