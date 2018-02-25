@@ -548,12 +548,14 @@ def JudgeInstance(game_type, instance_ts):
 
 # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
 def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission):
-
+    Log("gas_submission")
+    Log(gas_submission)
     check_value = CheckTiming(instance_ts)
-    if check_value == 1:
+    if check_value == 3:
         return "Timing too late"
-    if check_value == 2:
+    if check_value == 4:
         return "Timing too early"
+
 
     if isGameInstanceJudged(game_type, instance_ts):
         return "Game Instance already judged" # Ignore submission
@@ -566,7 +568,7 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
             return "Already registered"
         current_oracle_balance = GetOracleBalance(oracle)
         n_oracles_for_instance = GetOracleCountForInstance(game_type, instance_ts)
-
+        Log(gas_submission)
         if gas_submission == 0:
             if current_oracle_balance >= collateral_requirement:
                 new_count = n_oracles_for_instance + 1

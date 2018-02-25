@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ea43b6a-e564-4f6b-9876-a3a3b362e8ce" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.abi.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.test.json" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/hello_compiler.py" afterPath="$PROJECT_DIR$/smart_contract/hello_compiler.py" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.avm" afterPath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.avm" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.chain" afterPath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.chain" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.debug.json" afterPath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.debug.json" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.json" afterPath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.test.json" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.py" afterPath="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.py" />
+      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.avm" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.avm" />
+      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.debug.json" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.debug.json" />
+      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.py" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +18,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="hello_compiler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hello_compiler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/hello_compiler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="99">
@@ -35,18 +33,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2632">
               <caret line="603" column="0" lean-forward="true" selection-start-line="603" selection-start-column="0" selection-end-line="603" selection-end-column="0" />
-              <folding>
-                <element signature="e#257#351#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="oracle_judge_dapp.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge_dapp.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="360" column="22" lean-forward="true" selection-start-line="360" selection-start-column="22" selection-end-line="360" selection-end-column="22" />
               <folding>
                 <element signature="e#257#351#0" expanded="true" />
               </folding>
@@ -87,7 +73,17 @@
       <file leaf-file-name="oracle_judge_dapp.test.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge_dapp.test.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
+            <state relative-caret-position="66">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="39" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="neo_futures.test.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.test.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
               <caret line="36" column="84" lean-forward="false" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
               <folding />
             </state>
@@ -97,32 +93,10 @@
       <file leaf-file-name="neo_futures.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6600">
-              <caret line="200" column="33" lean-forward="true" selection-start-line="200" selection-start-column="33" selection-end-line="200" selection-end-column="33" />
+            <state relative-caret-position="391">
+              <caret line="550" column="23" lean-forward="false" selection-start-line="550" selection-start-column="23" selection-end-line="550" selection-end-column="23" />
               <folding>
                 <element signature="e#344#438#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="oracle_judge.abi.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge.abi.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="module.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python35/site-packages/boa/code/module.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#48#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -181,8 +155,9 @@
         <option value="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.json" />
         <option value="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.py" />
         <option value="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.test.json" />
-        <option value="$PROJECT_DIR$/smart_contract/neo_futures.py" />
         <option value="$PROJECT_DIR$/smart_contract/hello_compiler.py" />
+        <option value="$PROJECT_DIR$/smart_contract/neo_futures.py" />
+        <option value="$PROJECT_DIR$/smart_contract/neo_futures.test.json" />
       </list>
     </option>
   </component>
@@ -394,7 +369,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43563068" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43563068" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32964888" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -618,24 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge.abi.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2632">
-          <caret line="603" column="0" lean-forward="true" selection-start-line="603" selection-start-column="0" selection-end-line="603" selection-end-column="0" />
-          <folding>
-            <element signature="e#257#351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/neo-boa/boa/blockchain/vm/Neo/Header.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
@@ -708,16 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge_dapp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="360" column="22" lean-forward="true" selection-start-line="360" selection-start-column="22" selection-end-line="360" selection-end-column="22" />
-          <folding>
-            <element signature="e#257#351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/neo-boa/boa/code/module.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -726,28 +673,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/hello_compiler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge.abi.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.abi.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge_dapp.test.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="36" column="84" lean-forward="false" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
+        <state relative-caret-position="66">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="39" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge_dapp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="564" column="25" lean-forward="true" selection-start-line="564" selection-start-column="25" selection-end-line="564" selection-end-column="25" />
+          <folding>
+            <element signature="e#257#351#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2632">
+          <caret line="603" column="0" lean-forward="true" selection-start-line="603" selection-start-column="0" selection-end-line="603" selection-end-column="0" />
+          <folding>
+            <element signature="e#257#351#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6600">
-          <caret line="200" column="33" lean-forward="true" selection-start-line="200" selection-start-column="33" selection-end-line="200" selection-end-column="33" />
+        <state relative-caret-position="391">
+          <caret line="550" column="23" lean-forward="false" selection-start-line="550" selection-start-column="23" selection-end-line="550" selection-end-column="23" />
           <folding>
             <element signature="e#344#438#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smart_contract/hello_compiler.py">
+    <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.test.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        <state relative-caret-position="495">
+          <caret line="36" column="84" lean-forward="false" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
           <folding />
         </state>
       </provider>

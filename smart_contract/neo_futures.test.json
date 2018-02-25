@@ -1,0 +1,40 @@
+{
+	"cases": [
+
+			{
+				"name": "create_new_game",
+				"method": "Main",
+				"params": ["create_new_game", ["ASvsbeHUiYfLj8NFEwgW88QPegnitBU2Mv","NEO_USD"]]
+			},
+			{
+				"name": "create_new_game_instance",
+				"method": "Main",
+				"params": ["create_new_game_instance", ["ASvsbeHUiYfLj8NFEwgW88QPegnitBU2Mv","NEO_USD",1519547072]]
+			},
+			{
+				"name": "submit_prediction",
+				"method": "Main",
+				"params": ["submit_prediction", ["ASvsbeHUiYfLj8NFEwgW88QPegnitBU2Mv","NEO_USD",1519547072,"3560",5]]
+			},
+			{
+				"name": "submit_prediction_2",
+				"method": "Main",
+				"params": ["submit_prediction", ["Wing","NEO_USD",1519547072,"3560",5]]
+			},
+			{
+				"name": "judge_instance",
+				"method": "Main",
+				"params": ["judge_instance", ["NEO_USD",1519547072]]
+			},
+			{
+				"name": "get_prediction_for_instance",
+				"method": "Main",
+				"params": ["get_prediction_for_instance", ["NEO_USD",1519547072]]
+			},
+			{
+				"name": "get_correct_oracles_for_instance",
+				"method": "Main",
+				"params": ["get_correct_oracles_for_instance", ["NEO_USD",1519547072]]
+			}
+	]
+}

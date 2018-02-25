@@ -1,0 +1,22 @@
+ {
+    "hash":"0x8661a692f3fbd62973d64cf31ef0e9718425aad2",
+    "entrypoint":"Main",
+    "functions":
+    [
+        {
+            "name":"Main",
+            "parameters":
+            [
+                {
+                    "name":"operation",
+                    "type":"string"
+                },
+                {
+                    "name":"args",
+                    "type":"Array"
+                }
+            ],
+            "returntype":"Any"
+        }
+    ]
+}
