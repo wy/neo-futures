@@ -19,7 +19,7 @@ from neo.Settings import settings
 # settings.set_logfile("/tmp/logfile.log", max_bytes=1e7, backup_count=3)
 
 # Setup the smart contract instance
-smart_contract = SmartContract("f9967ad48f75f1596fde1f50635ff70c12144bba")
+smart_contract = SmartContract("e5edd72425ac66c7be18c9504d5c4702403b7869")
 
 
 # Register an event handler for Runtime.Notify events of the smart contract.
@@ -34,8 +34,9 @@ def sc_notify(event):
     # The event payload list has at least one element. As developer of the smart contract
     # you should know what data-type is in the bytes, and how to decode it. In this example,
     # it's just a string, so we decode it with utf-8:
-    for x in event.event_payload:
-        logger.info("- payload part 1: %s", x)
+    byte_array = event.event_payload[0]
+    tuple = bytes(byte_array).split(b'SEPARATOR')
+    logger.info(tuple)
 
 
 def custom_background_code():
