@@ -545,11 +545,12 @@ def JudgeInstance(game_type, instance_ts):
             oracle_available_balance = oracle_available_balance + bounty_per_correct_oracle
             UpdateAvailableBalance(oracle, oracle_available_balance)
 
-    notification = concat(instance_ts, n_correct)
+    sep = "SEPARATOR"
+    notification = concat(instance_ts, sep)
+    notification = concat(notification, n_correct)
+    notification = concat(notification, sep)
     notification = concat(notification, correct_prediction)
-    Notify(instance_ts)
-    Notify(n_correct)
-    Notify(correct_prediction)
+    Notify(notification)
     # Set Game to be Judged (no more judging allowed)
     SetGameInstanceJudged(game_type, instance_ts)
     return True
