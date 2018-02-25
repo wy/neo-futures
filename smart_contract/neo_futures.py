@@ -365,7 +365,10 @@ def CheckTiming(timestamp_normalised):
     height = GetHeight()
     hdr = GetHeader(height)
     ts = GetTimestamp(hdr)
+    Log(ts)
     t_n_plus_one = timestamp_normalised + timestep
+    Log(t_n_plus_one)
+    Log(timestamp_normalised)
     if ts > t_n_plus_one:
         return 1 # expired
     elif ts < timestamp_normalised:
@@ -557,6 +560,7 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
     Log("gas_submission")
     Log(gas_submission)
     check_value = CheckTiming(instance_ts)
+    Log(instance_ts)
     if check_value == 3:
         return "Timing too late"
     if check_value == 4:
