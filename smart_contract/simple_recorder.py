@@ -35,7 +35,7 @@ def sc_notify(event):
     # you should know what data-type is in the bytes, and how to decode it. In this example,
     # it's just a string, so we decode it with utf-8:
     for x in event.event_payload:
-        logger.info("- payload part 1: %s", x.decode("utf-8"))
+        logger.info("- payload part 1: %s", x)
 
 
 def custom_background_code():
