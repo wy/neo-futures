@@ -548,6 +548,9 @@ def JudgeInstance(game_type, instance_ts):
 
 # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
 def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission):
+
+    #ADD IN GAME_TYPE CHECK
+
     Log("gas_submission")
     Log(gas_submission)
     check_value = CheckTiming(instance_ts)
@@ -577,7 +580,9 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
                 # No assets sent and existing balance too low
                 return "Not enough balance to register"
         elif gas_submission == 5:
+                Log(current_oracle_balance)
                 current_oracle_balance = current_oracle_balance + gas_submission
+                Log(current_oracle_balance)
                 key = concat(key_prefix_agent_available_balance, oracle)
                 # Updates Balance of Oracle
                 context = GetContext()
