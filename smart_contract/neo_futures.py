@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """
-    Oracle Judge Smart Contract
+    NEO Futures Smart Contract
 
     Provides a Multi-Oracle Consensus Approach to receiving and confirming external 'facts' onto the Blockchain
+    Specifically, it implements a heartbeat approach to getting regular timeseries data
 
     Author: ~wy
     Copyright (c) 2018 Wing Yung Chan
@@ -39,19 +40,37 @@ key_prefix_agent_locked_balance = "agent_locked_balance::"
 
 
 
-version = "0.0.4"
+version = "0.0.5"
+
+# Intro
+"""
+CoinMarketCap Ticker API provides ticker updates for NEO-USD and other pairings
+roughly every 5 minutes. There is no guarantee on the timestep (it's not exactly 5 minutes)
+
+The Blockchain (i.e. Smart Contract) won't know the exact timestamp when CMC Ticker will update.
+
+Instead, use the following approach:
+T_0 = 1519544672 # arbitrary starting time
+T_0_CMC = first timestamp > T_0 when CMC's Ticker updates
+Oracles submit (T_0, T_0_CMC, Prediction) before T_1
+T_1 = T_0 + 6 minutes (480 seconds)
+
+----T_n---T_n_CMC------------T_n+1-----------
+"""
+
 
 # Algorithm Description
 """
 1. Create a new game type (e.g. retrieve the price of NEO in USD at a certain time from the Coin Market Cap API Ticker)
-2. Create a new instance of the game (NEO-USD price at time X)
-3. Oracles register themselves for the game instance by staking Y NEO-GAS Asset
-4. Event occurs at time X
-5. Oracles register and record the information
-6. Oracles send to the Smart Contract (The Judge) their "value" e.g. $115
-7. Deadline D occurs (D > X)
-8. Judge can be triggered by anyone to then make a judgement by choosing the most popular choice and separating the Oracles into Truth Tellers and Liars. Liars lose their balance, and Truth Tellers are rewarded from the Liars' seized assets.
-9. Judge contract has now saved and uneditable final value which other smart contracts can retrieve
+2. Oracle can send in a value for NEO-USD for T_n between T_n and T_n+1, as well as sending in collateral
+3. Anyone can try to 'get_prediction' for T_n, the first time this occurs it triggers the judging event
+4. After Judging happens, 'get_prediction' returns the judged value
+
+Note: to avoid getting penalised for latency,
+The Oracle sends in the T_n they are applying for. If it is before T_n or after T_n+1, they will lose the collateral
+they sent in for this application but not any balances they've accumulated
+
+
 """
 
 # Some general concepts
@@ -80,14 +99,11 @@ version = "0.0.4"
    create_new_game {{client}} {{game_type}}
    > creates a new game type if it isn't currently 'live'
    
-   create_new_game_instance {{client}} {{game_type}} {{instance_ts}}
-   > creates a new instance of game if instance isn't live but game type is
-   
    submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
    > submits prediction for game instance as long as balance is high enough (including any gas sent with this transaction)
       
    get_prediction_for_instance {{game_type}} {{instance_ts}}
-   > gets finalised prediction for specific instance or 0 if error
+   > gets finalised prediction for specific instance by judging or retrieving if already judged
    
    get_available_balance_oracle {{oracle}}
    > gets available balance for oracle (excludes balance pledged to an as-yet unjudged instance)
@@ -103,8 +119,9 @@ version = "0.0.4"
 
 """
 
-collateral_requirement = 5 # 5 NEO GAS
-deadline = 480 # Deadline in seconds
+starting_timestamp = 1519544672 # 2018-02-25 7:44:32 AM
+collateral_requirement = 5 # 5 NEO-GAS
+timestep = 480 # Deadline in seconds
 owner = b'z]\x16\x10\xad\xce\xc3Q\x1a&Fv\xfa\x1as\xa4E\xa03\xef'
 GAS_ASSET_ID = b'\xe7\x2d\x28\x69\x79\xee\x6c\xb1\xb7\xe6\x5d\xfd\xdf\xb2\xe3\x84\x10\x0b\x8d\x14\x8e\x77\x58\xde\x42\xe4\x16\x8b\x71\x79\x2c\x60'
 
@@ -115,7 +132,7 @@ def Main(operation, args):
     :return: Object: Bool (success or failure) or Prediction
     """
 
-    Log("ORACLE JUDGE")
+    Log("NEO-FUTURES - Oracle Judge Smart Contract")
     trigger = GetTrigger()
     arg_len = len(args)
     if arg_len > 5:
@@ -138,23 +155,10 @@ def Main(operation, args):
                 return False
             client_hash = args[0]
             game_type = args[1]
-            #if not CheckWitness(client_hash):
-            #    Log("Unauthorised hash")
-            #    return False
-            return CreateNewGame(client_hash, game_type)
-
-        # create_new_game_instance {{client}} {{game_type}} {{instance_ts}}
-        if operation == 'create_new_game_instance':
-            if arg_len != 3:
-                Log("Wrong arg length")
+            if not CheckWitness(client_hash):
+                Log("Unauthorised hash")
                 return False
-            client_hash = args[0]
-            game_type = args[1]
-            instance_ts = args[2]
-            #if not CheckWitness(client_hash):
-            #    Log("Unauthorised hash")
-            #    return False
-            return CreateNewGameInstance(client_hash, game_type, instance_ts)
+            return CreateNewGame(client_hash, game_type)
 
         # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
         if operation == 'submit_prediction':
@@ -166,9 +170,14 @@ def Main(operation, args):
             instance_ts = args[2]
             prediction = args[3]
             gas_submission = args[4]
-            #if not CheckWitness(oracle):
-            #    Log("Unauthorised hash")
-            #    return False
+            if not CheckWitness(oracle):
+                Log("Unauthorised hash")
+                return False
+
+            # Check instance_ts is correctly timestepped
+            if not CheckTimestamp(instance_ts):
+                Log("Not correct timestamp format")
+                return False
             return SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
 
         # judge_instance {{game_type}} {{instance_ts}}
@@ -228,18 +237,6 @@ def Main(operation, args):
 
 def isGameTypeLive(game_type):
     key = concat(key_prefix_game_type, game_type)
-    context = GetContext()
-    v = Get(context, key)
-    if v == 0:
-        return False
-    else:
-        return True
-
-
-def isGameInstanceLive(game_type, instance_ts):
-    k1 = concat(key_prefix_game_type, game_type)
-    k2 = concat(key_prefix_game_instance, instance_ts)
-    key = concat(k1, k2)
     context = GetContext()
     v = Get(context, key)
     if v == 0:
@@ -352,19 +349,29 @@ def GetPrediction(game_type, instance_ts):
     return v
 
 def CheckTimestamp(timestamp_normalised):
-    # Checks if TS() > T_n + deadline
+    # Check that T_n is M*timestep + T_0 for some non-negative integer M
+    if timestamp_normalised < starting_timestamp:
+        return False
+    else:
+        Mtimestep = timestamp_normalised - starting_timestamp
+        mod = Mtimestep % timestep
+        if mod == 0:
+            return True # Legitimate T_n
+        else:
+            return False # Not Legitimate T_n
+
+def CheckTiming(timestamp_normalised):
+    # Check T_n relative to current TS()
     height = GetHeight()
     hdr = GetHeader(height)
     ts = GetTimestamp(hdr)
-    Log(ts)
-    Log(timestamp_normalised)
-    nd = ts - deadline
-    Log(nd)
-    diff = nd - timestamp_normalised
-    Log(diff)
-    if nd > timestamp_normalised:
-        return True
-    return False
+    t_n_plus_one = timestamp_normalised + timestep
+    if ts > t_n_plus_one:
+        return 1 # expired
+    elif ts < timestamp_normalised:
+        return 2 # too early to submit, ignore
+    else:
+        return 0 # all good
 
 def isGameInstanceJudged(game_type, instance_ts):
     k1 = concat(key_prefix_game_type, game_type)
@@ -482,23 +489,6 @@ def CreateNewGame(client_hash, game_type):
         Put(context, key, client_hash)
     return "Success"
 
-# create_new_game_instance {{client}} {{game_type}} {{instance_ts}}
-def CreateNewGameInstance(client_hash, game_type, instance_ts):
-    if isGameInstanceLive(game_type, instance_ts):
-        return "Game Instance is Already Live"
-    else:
-        k1 = concat(key_prefix_game_type, game_type)
-        k2 = concat(key_prefix_game_instance, instance_ts)
-        key = concat(k1, k2)
-        context = GetContext()
-        Log(key)
-        Put(context, key, client_hash)
-        key_hash = concat(key, client_hash)
-        Log(key_hash)
-        #Notify(key_hash)
-    return "Success"
-
-
 # judge_instance {{game_type}} {{instance_ts}}
 def JudgeInstance(game_type, instance_ts):
     if isGameInstanceJudged(game_type, instance_ts):
@@ -548,6 +538,9 @@ def JudgeInstance(game_type, instance_ts):
             oracle_available_balance = oracle_available_balance + bounty_per_correct_oracle
             UpdateAvailableBalance(oracle, oracle_available_balance)
 
+    notification = concat(instance_ts, n_correct)
+    notification = concat(notification, correct_prediction)
+    Notify(notification)
     # Set Game to be Judged (no more judging allowed)
     SetGameInstanceJudged(game_type, instance_ts)
     return True
@@ -556,19 +549,17 @@ def JudgeInstance(game_type, instance_ts):
 # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
 def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission):
 
-    x = concat(game_type, instance_ts)
+    check_value = CheckTiming(instance_ts)
+    if check_value == 1:
+        return "Timing too late"
+    if check_value == 2:
+        return "Timing too early"
 
-    k1 = concat(key_prefix_game_type, game_type)
-    k2 = concat(key_prefix_game_instance, instance_ts)
-    key = concat(k1, k2)
-    context = GetContext()
-    v = Get(context, key)
-    if v == 0:
-        return "Game Instance not yet commissioned"
+    if isGameInstanceJudged(game_type, instance_ts):
+        return "Game Instance already judged" # Ignore submission
     else:
 
-        if isGameInstanceJudged(game_type, instance_ts):
-            return "Game Instance already judged"
+        # ASSERT: current timestamp is in the sweet spot between T_n and T_n+1
 
         # Check if Oracle already registered
         if isOracleRegisteredForInstance(game_type, instance_ts, oracle):
@@ -612,7 +603,5 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
             # New Current Winner
             UpdateMaxVotes(game_type, instance_ts, p_count)
             UpdatePrediction(game_type, instance_ts, prediction)
-        if CheckTimestamp(instance_ts):
-            return JudgeInstance(game_type, instance_ts)
         return True
 
