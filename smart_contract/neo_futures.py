@@ -199,8 +199,8 @@ def Main(operation, args):
                 return False
             game_type = args[0]
             instance_ts = args[1]
-            if not isGameInstanceJudged(game_type, instance_ts):
-                JudgeInstance(game_type, instance_ts)
+            # Try judging to make sure judged
+            JudgeInstance(game_type, instance_ts)
             return GetPrediction(game_type, instance_ts)
 
         # get_available_balance_oracle {{oracle}}
@@ -218,9 +218,8 @@ def Main(operation, args):
                 return False
             game_type = args[0]
             instance_ts = args[1]
-            if not isGameInstanceJudged(game_type, instance_ts):
-                Log("Game not yet Judged")
-                return False
+            # Try judging to make sure judged
+            JudgeInstance(game_type, instance_ts)
             return GetCorrectOracleCountForInstance(game_type, instance_ts)
 
         # debug_get_value {{key}}
