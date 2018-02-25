@@ -559,13 +559,26 @@ def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission)
 
     Log("gas_submission")
     Log(gas_submission)
-    check_value = CheckTiming(instance_ts)
-    Log(instance_ts)
-    if check_value == 3:
-        return "Timing too late"
-    if check_value == 4:
-        return "Timing too early"
 
+    # Check T_n relative to current TS()
+    height = GetHeight()
+    hdr = GetHeader(height)
+    ts = GetTimestamp(hdr)
+    Log(ts)
+    t_n_plus_one = instance_ts + timestep
+    Log(t_n_plus_one)
+    Log(instance_ts)
+    if ts > t_n_plus_one:
+        #return 1  # expired
+        Log("expired")
+    elif ts < instance_ts:
+        #return 2  # too early to submit, ignore
+        Log("too early")
+    else:
+        #return 0  # all good
+        Log("Sweet spot")
+
+    Log(instance_ts)
 
     if isGameInstanceJudged(game_type, instance_ts):
         return "Game Instance already judged" # Ignore submission
