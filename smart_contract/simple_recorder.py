@@ -37,13 +37,16 @@ def sc_notify(event):
     # it's just a string, so we decode it with utf-8:
     byte_array = event.event_payload[0]
     tuple = bytes(byte_array).split(b'SEPARATOR')
-    ts = BigInteger(tuple[0])
-    n_correct = BigInteger(tuple[1])
-    prediction = BigInteger(tuple[2])
+    ts = BigInteger.FromBytes(tuple[0])
+    n_correct = BigInteger.FromBytes(tuple[1])
+    prediction = BigInteger.FromBytes(tuple[2])
 
     logger.info("TS: {}".format(ts))
     logger.info("n_correct: {}".format(n_correct))
     logger.info("prediction: {}".format(prediction))
+    with open("~/webapp/CMC_Blockchain.txt","w+") as f:
+        f.write("{},{},{}".format(ts, n_correct, prediction))
+
 
 
 def custom_background_code():

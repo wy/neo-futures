@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ea43b6a-e564-4f6b-9876-a3a3b362e8ce" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/webapp/neo_price_watcher_cmc_api.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/webapp/templates/index.html" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" afterPath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
       <change beforePath="$PROJECT_DIR$/smart_contract/simple_recorder.py" afterPath="$PROJECT_DIR$/smart_contract/simple_recorder.py" />
     </list>
@@ -14,16 +17,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="hello_compiler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smart_contract/hello_compiler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="3" column="41" lean-forward="true" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="oracle_judge.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -32,26 +25,6 @@
               <folding>
                 <element signature="e#257#351#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="module.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/PycharmProjects/neo-boa/boa/code/module.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="433" column="0" lean-forward="false" selection-start-line="433" selection-start-column="0" selection-end-line="433" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="oracle_judge_dapp.test.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge_dapp.test.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="2" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="39" selection-end-column="1" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -98,14 +71,48 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple_recorder.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="simple_recorder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/simple_recorder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="45" column="50" lean-forward="true" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+            <state relative-caret-position="416">
+              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding>
                 <element signature="e#74#90#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flask_app.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/flask_app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="713">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding>
+                <element signature="e#71#120#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="neo_price_watcher_cmc_api.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/neo_price_watcher_cmc_api.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="16" column="74" lean-forward="false" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
+              <folding>
+                <element signature="e#309#341#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/webapp/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="15" column="130" lean-forward="false" selection-start-line="15" selection-start-column="130" selection-end-line="15" selection-end-column="130" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -166,7 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/webapp/flask_app.py" />
         <option value="$PROJECT_DIR$/smart_contract/oracle_lite.py" />
         <option value="$USER_HOME$/AppData/Roaming/Python/Python35/site-packages/boa/code/module.py" />
         <option value="$PROJECT_DIR$/smart_contract/oracle_judge.py" />
@@ -179,7 +185,10 @@
         <option value="$PROJECT_DIR$/smart_contract/neo_futures.test.json" />
         <option value="$PROJECT_DIR$/smart_contract/neo_futures.py" />
         <option value="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
+        <option value="$PROJECT_DIR$/webapp/flask_app.py" />
+        <option value="$PROJECT_DIR$/webapp/neo_price_watcher_cmc_api.py" />
         <option value="$PROJECT_DIR$/smart_contract/simple_recorder.py" />
+        <option value="$PROJECT_DIR$/webapp/templates/index.html" />
       </list>
     </option>
   </component>
@@ -224,6 +233,12 @@
               <item name="neo-futures" type="47feb1d3:ProjectViewModuleNode" />
               <item name="neo-futures" type="462c0819:PsiDirectoryNode" />
               <item name="smart_contract" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="neo-futures" type="b2602c69:ProjectViewProjectNode" />
+              <item name="neo-futures" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="neo-futures" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="neo-futures" type="b2602c69:ProjectViewProjectNode" />
@@ -423,14 +438,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/webapp/flask_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python35/site-packages/boa/blockchain/vm/Neo/Runtime.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -783,13 +790,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/flask_app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="713">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#71#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/neo_price_watcher_cmc_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="16" column="74" lean-forward="false" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
+          <folding>
+            <element signature="e#309#341#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/smart_contract/simple_recorder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="45" column="50" lean-forward="true" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+        <state relative-caret-position="416">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
             <element signature="e#74#90#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="15" column="130" lean-forward="false" selection-start-line="15" selection-start-column="130" selection-end-line="15" selection-end-column="130" />
+          <folding />
         </state>
       </provider>
     </entry>
