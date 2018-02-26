@@ -559,7 +559,12 @@ def JudgeInstance(game_type, instance_ts):
 # submit_prediction {{oracle}} {{game_type}} {{instance_ts}} {{prediction}} {{gas-submission}}
 def SubmitPrediction(oracle, game_type, instance_ts, prediction, gas_submission):
 
-    #ADD IN GAME_TYPE CHECK
+    #Add in auto-judging
+    prev_instance = instance_ts - timestep
+    JudgeInstance(game_type,prev_instance)
+
+    # Trivial TODO
+    # ADD IN GAME_TYPE CHECK
 
     Log("gas_submission")
     Log(gas_submission)

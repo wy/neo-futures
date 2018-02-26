@@ -44,7 +44,7 @@ def sc_notify(event):
     logger.info("TS: {}".format(ts))
     logger.info("n_correct: {}".format(n_correct))
     logger.info("prediction: {}".format(prediction))
-    with open("~/webapp/CMC_Blockchain.txt","w+") as f:
+    with open("../../webapp/CMC_Blockchain.txt","w+") as f:
         f.write("{},{},{}".format(ts, n_correct, prediction))
 
 
