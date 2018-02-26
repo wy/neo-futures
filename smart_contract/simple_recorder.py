@@ -12,6 +12,7 @@ from neo.Network.NodeLeader import NodeLeader
 from neo.Core.Blockchain import Blockchain
 from neo.Implementations.Blockchains.LevelDB.LevelDBBlockchain import LevelDBBlockchain
 from neo.Settings import settings
+from neocore.BigInteger import BigInteger
 
 
 # If you want the log messages to also be saved in a logfile, enable the
@@ -36,7 +37,13 @@ def sc_notify(event):
     # it's just a string, so we decode it with utf-8:
     byte_array = event.event_payload[0]
     tuple = bytes(byte_array).split(b'SEPARATOR')
-    logger.info(tuple)
+    ts = BigInteger(tuple[0])
+    n_correct = BigInteger(tuple[1])
+    prediction = BigInteger(tuple[2])
+
+    logger.info("TS: {}".format(ts))
+    logger.info("n_correct: {}".format(n_correct))
+    logger.info("prediction: {}".format(prediction))
 
 
 def custom_background_code():
