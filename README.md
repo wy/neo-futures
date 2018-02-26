@@ -31,7 +31,7 @@ N.B. This differs from Augur and Gnosis in that this is not about using multiple
 
 Naturally, the strength of this solution is dependent on the number of Oracles, as this increases to a large number, it becomes harder and harder for any malicious users to fool the system (without risking a significant amount of assets - in this case, NEO-GAS).
 
-## The Algorithm (main idea)
+## The Algorithm (generic idea)
 
 ```
 1. Create a new game type (e.g. retrieve the price of NEO in USD at a certain time from the Coin Market Cap API Ticker)
@@ -44,14 +44,22 @@ Naturally, the strength of this solution is dependent on the number of Oracles, 
 8. Judge can be triggered by anyone to then make a judgement by choosing the most popular choice and separating the Oracles into Truth Tellers and Liars. Liars lose their balance, and Truth Tellers are rewarded from the Liars' seized assets.
 9. Judge contract has now saved and uneditable final value which other smart contracts can retrieve
 ```
-## Working Version
 
-To demonstrate how it works, we have provided and deployed the following components (running on CoZ Testnet):
-1. Judge Smart Contract (Hash: XXXX). Source code is in this repo
-2. Python Oracle Implementation for Coin Market Cap NEO-USD Pair
-3. Created a game type (NEO-USD)
-4. Python Instance Creator Implementation (create a new game instance to get a new price every 10 minutes - 6 per hour)
-5. Web Explorer Interface - allowing you to see the NEO Blockchain actually having access to the price of NEO (in USD) and comparing it to an API ticker pull (python)
+## Specific Setup used for Dapps 2
+
+```
+1. CMC Submitter - Python Oracle Implementation - submits the CoinMarketCap prices aligned to a specific timestamp format (this is in 480 second increments to align it with the Blockchain that can't see CoinMarketCap's specific timestamps.
+2. Smart Contract (Neo Futures) - d5537fc7dea2150d250e9d5f0cd67b8b248b3fdf - able to receive prediction submissions and judge previous submissions too
+3. Simple Recorder - listens to Runtime.Notify events from the Smart Contract which tell it the latest judged submission (timestamp, price, number of correct oracles)
+4. Web Explorer Interface - allowing you to see the NEO Blockchain actually having access to the price of NEO (in USD) and comparing it to an API ticker pull (python)
+```
+
+# Notes
+
+1. You can test out the smart contract by submitting predictions (see smart contract source code for more details)
+2. You can run your own Python Oracle by running the cmc_submitter.py within a neo-python installation. Note: you will need to create a wallet called 'infinite' with pw: 0123456789, and give it enough NEO-GAS to get started
+3. The Smart Contract is deployed to COZ NET, also works fine on private net obviously.
+
 
 ## Future Work
 
@@ -59,4 +67,4 @@ At the moment, there is no known easy way to trigger transfers of NEO or NEO-GAS
 
 Secondly, the purpose of the NEO-Futures project is to eventually implement a Futures Exchange for NEO and maybe other currencies. We hope to use any prize awards from CoZ to help devote some time and get support to build it. A fast, decentralized futures exchange pegged to Fiat or other currencies?! Sounds good, right.
 
-With thanks to Kiran Purang (Design), Sharon Chan (Fuel).
+With thanks to Kiran Purang (Design), Sharon Chan (Fuel), fabwa, and reflos (neo-debugger-tools)
