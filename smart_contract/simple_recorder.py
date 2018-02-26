@@ -20,7 +20,7 @@ from neocore.BigInteger import BigInteger
 # settings.set_logfile("/tmp/logfile.log", max_bytes=1e7, backup_count=3)
 
 # Setup the smart contract instance
-smart_contract = SmartContract("e5edd72425ac66c7be18c9504d5c4702403b7869")
+smart_contract = SmartContract("284ca8ba0a1084b85c20234e4d276279c5591fc3")
 
 
 # Register an event handler for Runtime.Notify events of the smart contract.
