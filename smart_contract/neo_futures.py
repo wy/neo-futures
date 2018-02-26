@@ -40,7 +40,7 @@ key_prefix_agent_locked_balance = "agent_locked_balance::"
 
 
 
-version = "0.0.5.12"
+version = "0.0.5.13"
 
 # Intro
 """

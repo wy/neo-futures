@@ -12,19 +12,19 @@ import sys
 from logzero import logger
 from twisted.internet import reactor, task
 
+from neo.Wallets.utils import to_aes_key
 from neo.contrib.smartcontract import  SmartContract
 from neo.Network.NodeLeader import NodeLeader
 from neo.Core.Blockchain import Blockchain
 from neo.Implementations.Blockchains.LevelDB.LevelDBBlockchain import LevelDBBlockchain
 from neo.Settings import settings
-from Invoke_Debug import InvokeContract, TestInvokeContract, test_invoke
+from neo.Prompt.Commands.Invoke import InvokeContract, TestInvokeContract, test_invoke
 from neo.Implementations.Wallets.peewee.UserWallet import UserWallet
-from neocore.KeyPair import KeyPair
 import coinmarketcap
 from neocore.BigInteger import BigInteger
 from neo.Core.Helper import Helper
+from neocore.Fixed8 import Fixed8
 
-import random
 
 # If you want the log messages to also be saved in a logfile, enable the
 # next line. This configures a logfile with max 10 MB and 3 rotations:
@@ -33,16 +33,15 @@ import random
 # Setup the smart contract instance
 # This is online voting v0.5
 
-#smart_contract_hash = "7dc2db1227a8518146dc41c55dfafa97d9a83c27"
+smart_contract_hash = "d5537fc7dea2150d250e9d5f0cd67b8b248b3fdf"
 smart_contract = SmartContract(smart_contract_hash)
-#wallet_hash = 'Aaaapk3CRx547bFvkemgc7z2xXewzaZtdP'
-#wallet_arr = Helper.AddrStrToScriptHash(wallet_hash).ToArray()
+
 
 Wallet = None
 
 buffer = None
 
-normalisation = 480
+#normalisation = 480
 
 def test_invoke_contract(args):
     if not Wallet:
@@ -55,16 +54,29 @@ def test_invoke_contract(args):
         while (h == Blockchain.Default().Height):
             sleep(10)
 
-        while(int(100 * Wallet._current_height / Blockchain.Default().Height) < 100):
+        while(Blockchain.Default().Height - Wallet._current_height > 1):
             print("sleeping whilst it syncs up")
-            sleep(10)
+            print(Blockchain.Default().Height)
+            print(Wallet._current_height)
+            sleep(5)
 
-
-        print(args)
-        print(args[1:])
+        logger.info("here are the args to run")
+        logger.info(args)
+        logger.info(args[1:])
         tx, fee, results, num_ops= TestInvokeContract(Wallet, args)
 
+        print(
+             "\n-------------------------------------------------------------------------------------------------------------------------------------")
+        print("Test invoke successful")
+        print("Total operations: %s" % num_ops)
+        print("Results %s" % [str(item) for item in results])
+        print("Invoke TX GAS cost: %s" % (tx.Gas.value / Fixed8.D))
+        print("Invoke TX fee: %s" % (fee.value / Fixed8.D))
+        print(
+              "-------------------------------------------------------------------------------------------------------------------------------------\n")
+
         print("Results %s " % [str(item) for item in results])
+        print(tx.Gas.value / Fixed8.D)
 
         if tx is not None and results is not None:
             print("Invoking for real")
@@ -73,44 +85,6 @@ def test_invoke_contract(args):
             result = InvokeContract(Wallet, tx, fee)
             return
     return
-
-
-# Register an event handler for Runtime.Notify events of the smart contract.
-@smart_contract.on_notify
-def sc_log(event):
-    logger.info(Wallet.AddressVersion)
-    logger.info("SmartContract Runtime.Notify event: %s", event)
-
-    # Make sure that the event payload list has at least one element.
-    if not len(event.event_payload):
-        return
-
-    # Make sure not test mode
-    if event.test_mode:
-        return
-
-    # The event payload list has at least one element. As developer of the smart contract
-    # you should know what data-type is in the bytes, and how to decode it. In this example,
-    # it's just a string, so we decode it with utf-8:
-    logger.info("- payload part 1: %s", event.event_payload[0])
-    game = event.event_payload[0]
-    #args = ['ef254dc68e36de6a3a5d2de59ae1cdff3887938f','submit',[game,2,wallet_hash]]
-    #x = random.randint(1, 9)
-    latest_price = BigInteger(float(buffer[-1][1])*1000)
-
-    live_ts = BigInteger(buffer[-1][0])
-    remainder = live_ts % normalisation
-    ts = live_ts - remainder
-
-    args = [smart_contract_hash, 'submit_prediction', [game, ts, latest_price,wallet_arr]]
-    #bytearray(b'\xceG\xc5W\xb8\xb8\x906S\x06F\xa6\x18\x9b\x8c\xb1\x94\xc4\xda\xad')]]
-
-    # Start a thread with custom code
-    d = threading.Thread(target=test_invoke_contract, args=[args])
-    d.setDaemon(True)  # daemonizing the thread will kill it when the main thread is quit
-    d.start()
-    #test_invoke_contract(args)
-
 
 
 def custom_background_code():
@@ -131,13 +105,14 @@ def custom_background_code():
             latest_price = BigInteger(float(buffer[-1][1]) * 1000)
 
             live_ts = BigInteger(buffer[-1][0])
-            remainder = live_ts % normalisation
-            ts = live_ts - remainder
+            starting_ts = BigInteger(1519544672)
+            diff = live_ts - starting_ts
+            div = diff // 480
+            ts = starting_ts + (div * 480)
 
 
 
             args = [smart_contract_hash, 'submit_prediction', [wallet_arr, bytearray(b'NEO_USD'), ts, latest_price, 5]]
-            # bytearray(b'\xceG\xc5W\xb8\xb8\x906S\x06F\xa6\x18\x9b\x8c\xb1\x94\xc4\xda\xad')]]
             print(args)
 
             # Start a thread with custom code
@@ -147,11 +122,9 @@ def custom_background_code():
         sleep(15)
 
 
-
-
 def main():
 
-    settings.setup_coz('protocol.coz.json')
+    settings.setup_coznet()
     # Setup the blockchain
     blockchain = LevelDBBlockchain(settings.LEVELDB_PATH)
     Blockchain.RegisterBlockchain(blockchain)
@@ -159,17 +132,16 @@ def main():
     dbloop.start(.1)
     NodeLeader.Instance().Start()
 
-    # Disable smart contract events for external smart contracts
+    #Disable smart contract events for external smart contracts
     settings.set_log_smart_contract_events(False)
 
     global Wallet
-    Wallet = UserWallet.Open(path="infinitewallet", password="0123456789")
+    Wallet = UserWallet.Open(path="infinite", password=to_aes_key("0123456789"))
     logger.info("Created the Wallet")
     logger.info(Wallet.AddressVersion)
     walletdb_loop = task.LoopingCall(Wallet.ProcessBlocks)
     walletdb_loop.start(1)
-    #Wallet.CreateKey(KeyPair.PrivateKeyFromWIF(wif))
-
+  
     # Start a thread with custom code
     d = threading.Thread(target=custom_background_code)
     d.setDaemon(True)  # daemonizing the thread will kill it when the main thread is quit
@@ -184,9 +156,7 @@ def main():
 if __name__ == "__main__":
     global wallet_hash
     global wallet_arr
-    global smart_contract_hash
     wallet_hash = sys.argv[1]
-    smart_contract_hash = sys.argv[2]
     print(wallet_hash)
     wallet_arr = Helper.AddrStrToScriptHash(wallet_hash).ToArray()
     main()

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ea43b6a-e564-4f6b-9876-a3a3b362e8ce" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/smart_contract/cmc.txt" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" afterPath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.avm" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.avm" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.debug.json" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.debug.json" />
       <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.py" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.py" />
+      <change beforePath="$PROJECT_DIR$/smart_contract/simple_recorder.py" afterPath="$PROJECT_DIR$/smart_contract/simple_recorder.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,18 +17,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="oracle_judge.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smart_contract/oracle_judge.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2632">
-              <caret line="603" column="0" lean-forward="true" selection-start-line="603" selection-start-column="0" selection-end-line="603" selection-end-column="0" />
-              <folding>
-                <element signature="e#257#351#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="neo_futures.test.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.test.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -38,14 +27,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="neo_futures.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="neo_futures.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="528" column="31" lean-forward="false" selection-start-line="528" selection-start-column="31" selection-end-line="528" selection-end-column="31" />
+            <state relative-caret-position="491">
+              <caret line="565" column="24" lean-forward="true" selection-start-line="565" selection-start-column="24" selection-end-line="565" selection-end-column="24" />
               <folding>
                 <element signature="e#344#438#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cmc.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smart_contract/cmc.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5511">
+              <caret line="167" column="10" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="167" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -116,11 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cmc_submitter.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cmc_submitter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/smart_contract/cmc_submitter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5696">
-              <caret line="187" column="25" lean-forward="false" selection-start-line="187" selection-start-column="25" selection-end-line="187" selection-end-column="25" />
+            <state relative-caret-position="706">
+              <caret line="143" column="2" lean-forward="false" selection-start-line="143" selection-start-column="2" selection-end-line="143" selection-end-column="2" />
               <folding>
                 <element signature="e#289#305#0" expanded="true" />
               </folding>
@@ -161,6 +160,8 @@
       <find>timest</find>
       <find>dead</find>
       <find>CheckTime</find>
+      <find>gas b</find>
+      <find>gas</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Wing\PycharmProjects\neo-boa</dir>
@@ -182,20 +183,21 @@
         <option value="$PROJECT_DIR$/smart_contract/oracle_judge_dapp.test.json" />
         <option value="$PROJECT_DIR$/smart_contract/hello_compiler.py" />
         <option value="$PROJECT_DIR$/smart_contract/neo_futures.test.json" />
-        <option value="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
         <option value="$PROJECT_DIR$/webapp/neo_price_watcher_cmc_api.py" />
         <option value="$PROJECT_DIR$/webapp/templates/index.html" />
         <option value="$PROJECT_DIR$/webapp/flask_app.py" />
         <option value="$PROJECT_DIR$/smart_contract/simple_recorder.py" />
         <option value="$PROJECT_DIR$/smart_contract/neo_futures.py" />
+        <option value="$PROJECT_DIR$/smart_contract/cmc.txt" />
+        <option value="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-13" />
-    <option name="y" value="-13" />
-    <option name="width" value="3226" />
-    <option name="height" value="1746" />
+    <option name="x" value="-3853" />
+    <option name="y" value="1437" />
+    <option name="width" value="3866" />
+    <option name="height" value="2106" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -398,14 +400,14 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
+    <frame x="-3853" y="1437" width="3866" height="2106" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20221066" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16385669" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32964888" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -769,16 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smart_contract/cmc_submitter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5696">
-          <caret line="187" column="25" lean-forward="false" selection-start-line="187" selection-start-column="25" selection-end-line="187" selection-end-column="25" />
-          <folding>
-            <element signature="e#289#305#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/neo_price_watcher_cmc_api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -819,10 +811,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="528" column="31" lean-forward="false" selection-start-line="528" selection-start-column="31" selection-end-line="528" selection-end-column="31" />
+        <state relative-caret-position="491">
+          <caret line="565" column="24" lean-forward="true" selection-start-line="565" selection-start-column="24" selection-end-line="565" selection-end-column="24" />
           <folding>
             <element signature="e#344#438#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/cmc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5511">
+          <caret line="167" column="10" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="167" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/cmc_submitter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="706">
+          <caret line="143" column="2" lean-forward="false" selection-start-line="143" selection-start-column="2" selection-end-line="143" selection-end-column="2" />
+          <folding>
+            <element signature="e#289#305#0" expanded="true" />
           </folding>
         </state>
       </provider>
