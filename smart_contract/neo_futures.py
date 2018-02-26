@@ -525,6 +525,9 @@ def JudgeInstance(game_type, instance_ts):
             total_bounty = total_bounty + oracle_available_balance + oracle_locked_balance
             WipeOutBalances(oracle)
 
+    if n_correct == 0:
+        return "Nothing correct"
+
     bounty_per_correct_oracle = total_bounty // n_correct
     owner_bounty = total_bounty % n_correct
     AddBountyForOwner(owner_bounty)

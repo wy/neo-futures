@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8ea43b6a-e564-4f6b-9876-a3a3b362e8ce" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" afterPath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/simple_recorder.py" afterPath="$PROJECT_DIR$/smart_contract/simple_recorder.py" />
+      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.avm" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.avm" />
+      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.debug.json" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.debug.json" />
+      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.py" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="neo_futures.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="neo_futures.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+            <state relative-caret-position="544">
+              <caret line="528" column="31" lean-forward="false" selection-start-line="528" selection-start-column="31" selection-end-line="528" selection-end-column="31" />
               <folding>
                 <element signature="e#344#438#0" expanded="true" />
               </folding>
@@ -68,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple_recorder.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="simple_recorder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/simple_recorder.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="726">
@@ -184,8 +186,8 @@
         <option value="$PROJECT_DIR$/webapp/neo_price_watcher_cmc_api.py" />
         <option value="$PROJECT_DIR$/webapp/templates/index.html" />
         <option value="$PROJECT_DIR$/webapp/flask_app.py" />
-        <option value="$PROJECT_DIR$/smart_contract/neo_futures.py" />
         <option value="$PROJECT_DIR$/smart_contract/simple_recorder.py" />
+        <option value="$PROJECT_DIR$/smart_contract/neo_futures.py" />
       </list>
     </option>
   </component>
@@ -403,7 +405,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20221066" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20221066" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32964888" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -805,22 +807,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-          <folding>
-            <element signature="e#344#438#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/smart_contract/simple_recorder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
           <caret line="22" column="72" lean-forward="false" selection-start-line="22" selection-start-column="72" selection-end-line="22" selection-end-column="72" />
           <folding>
             <element signature="e#74#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="528" column="31" lean-forward="false" selection-start-line="528" selection-start-column="31" selection-end-line="528" selection-end-column="31" />
+          <folding>
+            <element signature="e#344#438#0" expanded="true" />
           </folding>
         </state>
       </provider>
