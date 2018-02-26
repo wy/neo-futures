@@ -69,4 +69,7 @@ At the moment, there is no known easy way to trigger transfers of NEO or NEO-GAS
 
 Secondly, the purpose of the NEO-Futures project is to eventually implement a Futures Exchange for NEO and maybe other currencies. We hope to use any prize awards from CoZ to help devote some time and get support to build it. A fast, decentralized futures exchange pegged to Fiat or other currencies?! Sounds good, right.
 
+One legitimate challenge is fee estimation during a multi-voting procedure. This was fine when Coz Testnet imposed low fees so it was always fine, but now that the costs are higher, you end up with problems around fee estimation on race conditions.
+It would be helpful if there was a way to have a max cap that you could go up to with each transaction that would provide some flexibility.
+
 With thanks to Kiran Purang (Design), Sharon Chan (Fuel), fabwa, and reflos (neo-debugger-tools)
