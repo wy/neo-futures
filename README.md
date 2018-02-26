@@ -31,6 +31,8 @@ N.B. This differs from Augur and Gnosis in that this is not about using multiple
 
 Naturally, the strength of this solution is dependent on the number of Oracles, as this increases to a large number, it becomes harder and harder for any malicious users to fool the system (without risking a significant amount of assets - in this case, NEO-GAS).
 
+![NEO Futures One Slide](neo-futures-one-slider.JPG)
+
 ## The Algorithm (generic idea)
 
 ```
