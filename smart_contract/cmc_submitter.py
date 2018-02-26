@@ -141,7 +141,7 @@ def main():
     logger.info(Wallet.AddressVersion)
     walletdb_loop = task.LoopingCall(Wallet.ProcessBlocks)
     walletdb_loop.start(1)
-  
+
     # Start a thread with custom code
     d = threading.Thread(target=custom_background_code)
     d.setDaemon(True)  # daemonizing the thread will kill it when the main thread is quit

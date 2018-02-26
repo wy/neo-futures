@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ea43b6a-e564-4f6b-9876-a3a3b362e8ce" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/smart_contract/cmc.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/smart_contract/coinmarketcap.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" afterPath="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/neo_futures.py" afterPath="$PROJECT_DIR$/smart_contract/neo_futures.py" />
-      <change beforePath="$PROJECT_DIR$/smart_contract/simple_recorder.py" afterPath="$PROJECT_DIR$/smart_contract/simple_recorder.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,16 +15,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="neo_futures.test.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.test.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="36" column="84" lean-forward="false" selection-start-line="36" selection-start-column="84" selection-end-line="36" selection-end-column="84" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="neo_futures.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/neo_futures.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,13 +103,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cmc_submitter.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cmc_submitter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart_contract/cmc_submitter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="706">
-              <caret line="143" column="2" lean-forward="false" selection-start-line="143" selection-start-column="2" selection-end-line="143" selection-end-column="2" />
+            <state relative-caret-position="475">
+              <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coinmarketcap.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/smart_contract/coinmarketcap.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1432">
+              <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
               <folding>
-                <element signature="e#289#305#0" expanded="true" />
+                <element signature="e#615#630#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -190,6 +188,7 @@
         <option value="$PROJECT_DIR$/smart_contract/neo_futures.py" />
         <option value="$PROJECT_DIR$/smart_contract/cmc.txt" />
         <option value="$PROJECT_DIR$/smart_contract/cmc_submitter.py" />
+        <option value="$PROJECT_DIR$/smart_contract/coinmarketcap.py" />
       </list>
     </option>
   </component>
@@ -829,10 +828,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/smart_contract/cmc_submitter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="143" column="2" lean-forward="false" selection-start-line="143" selection-start-column="2" selection-end-line="143" selection-end-column="2" />
+        <state relative-caret-position="475">
+          <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smart_contract/coinmarketcap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1432">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
           <folding>
-            <element signature="e#289#305#0" expanded="true" />
+            <element signature="e#615#630#0" expanded="true" />
           </folding>
         </state>
       </provider>
